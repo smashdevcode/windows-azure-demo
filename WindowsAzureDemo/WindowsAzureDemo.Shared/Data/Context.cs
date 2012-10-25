@@ -11,14 +11,19 @@ namespace WindowsAzureDemo.Shared.Data
 {
 	public class Context : DbContext
 	{
+		#region Constructors
 		public Context()
 			: base(CloudConfigurationManager.GetSetting("DatabaseConnectionString"))
 		{
 		}
+		#endregion
 
+		#region Properties
 		public DbSet<Video> Videos { get; set; }
 		public DbSet<VideoAsset> VideoAssets { get; set; }
+		#endregion
 
+		#region Methods
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -34,5 +39,6 @@ namespace WindowsAzureDemo.Shared.Data
 			videoAssetEntity.Ignore(va => va.FileTypeEnum);
 			videoAssetEntity.Property(v => v.MediaServicesAssetID).HasMaxLength(50).IsRequired();
 		}
+		#endregion
 	}
 }

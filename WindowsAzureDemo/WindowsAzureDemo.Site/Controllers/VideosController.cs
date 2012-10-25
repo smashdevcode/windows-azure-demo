@@ -10,18 +10,26 @@ using WindowsAzureDemo.Shared.Media;
 namespace WindowsAzureDemo.Site.Controllers
 {
     public class VideosController : Controller
-    {
+	{
+		#region Private Fields
 		private Repository _repository;
+		#endregion
 
+		#region Constructors
 		public VideosController()
 		{
 			_repository = new Repository();
 		}
+		#endregion
 
-        public ActionResult Index()
+		#region Methods
+		#region Index
+		public ActionResult Index()
         {
             return View(_repository.GetVideos());
         }
+		#endregion
+		#region Upload
 		public ActionResult Upload()
 		{
 			return View(new Video());
@@ -45,5 +53,7 @@ namespace WindowsAzureDemo.Site.Controllers
 			videoProcessor.DeleteVideo(videoID);
 			return RedirectToAction("Index");
 		}
+		#endregion
+		#endregion
 	}
 }

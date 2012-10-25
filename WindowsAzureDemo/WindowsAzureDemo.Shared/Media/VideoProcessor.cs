@@ -11,15 +11,22 @@ namespace WindowsAzureDemo.Shared.Media
 {
 	public class VideoProcessor
 	{
+		#region Constants
 		public const string VIDEOS_CONTAINER = "videos";
+		#endregion
 
+		#region Private Fields
 		private Repository _repository = null;
+		#endregion
 
+		#region Constructors
 		public VideoProcessor(Repository repository)
 		{
 			_repository = repository;
 		}
+		#endregion
 
+		#region Methods
 		public void SaveVideo(Video video)
 		{
 			// upload the file
@@ -46,5 +53,6 @@ namespace WindowsAzureDemo.Shared.Media
 			// delete the video from the database
 			_repository.DeleteVideo(video);
 		}
+		#endregion
 	}
 }

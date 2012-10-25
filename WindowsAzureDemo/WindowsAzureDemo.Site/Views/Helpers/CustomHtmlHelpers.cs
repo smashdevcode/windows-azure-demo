@@ -8,11 +8,14 @@ using System.Web.Mvc;
 
 namespace WindowsAzureDemo.Site.Views.Helpers
 {
+	#region Inner Classes
 	public class GridColumn<TModel> where TModel : class
 	{
 		public string Header { get; set; }
 		public Func<TModel, MvcHtmlString> Value { get; set; }
 	}
+	#endregion
+
 	public static class CustomHtmlHelpers
 	{
 		#region RenderDetails

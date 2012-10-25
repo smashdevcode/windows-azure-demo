@@ -11,6 +11,8 @@ namespace WindowsAzureDemo.Shared.Storage
 {
 	public class BlobStorage
 	{
+		#region Methods
+		#region GetClient
 		public static CloudBlobClient GetClient()
 		{
 			// get a reference to the storage account
@@ -20,6 +22,8 @@ namespace WindowsAzureDemo.Shared.Storage
 			// return the blob client
 			return storageAccount.CreateCloudBlobClient();
 		}
+		#endregion
+		#region GetContainer
 		public static CloudBlobContainer GetContainer(string containerName)
 		{
 			var client = GetClient();
@@ -38,10 +42,14 @@ namespace WindowsAzureDemo.Shared.Storage
 
 			return container;
 		}
+		#endregion
+		#region GetBlob
 		public static CloudBlob GetBlob(string containerName, string fileName)
 		{
 			return GetContainer(containerName).GetBlobReference(fileName);
 		}
+		#endregion
+		#region GetNewBlob
 		public static CloudBlob GetNewBlob(string containerName, string fileName, out string newFileName)
 		{
 			var fileExtension = Path.GetExtension(fileName);
@@ -50,6 +58,8 @@ namespace WindowsAzureDemo.Shared.Storage
 				fileNameWithoutExtension, DateTime.Now, fileExtension);
 			return GetBlob(containerName, newFileName);
 		}
+		#endregion
+		#region DeleteBlob
 		public static void DeleteBlob(string containerName, string fileName)
 		{
 			var blob = GetBlob(containerName, fileName);
@@ -62,6 +72,8 @@ namespace WindowsAzureDemo.Shared.Storage
 				Trace.WriteLine(exc.Message);
 			}
 		}
+		#endregion
+		#region UploadBlob
 		public static string UploadBlob(string containerName, string fileName, Stream fileData)
 		{
 			// retrieve reference to the blob
@@ -74,5 +86,7 @@ namespace WindowsAzureDemo.Shared.Storage
 			// return the new file name
 			return newFileName;
 		}
+		#endregion
+		#endregion
 	}
 }

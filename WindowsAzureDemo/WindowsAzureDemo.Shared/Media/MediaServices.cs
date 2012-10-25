@@ -11,15 +11,20 @@ namespace WindowsAzureDemo.Shared.Media
 {
 	public class MediaServices : IDisposable
 	{
+		#region Private Fields
 		private CloudMediaContext _context = null;
+		#endregion
 
+		#region Constructors
 		public MediaServices()
 		{
 			var accountName = CloudConfigurationManager.GetSetting("MediaServicesAccountName");
 			var accountKey = CloudConfigurationManager.GetSetting("MediaServicesAccountKey");
 			_context = new CloudMediaContext(accountName, accountKey);
 		}
+		#endregion
 
+		#region Methods
 		#region Assets
 		public IAsset GetAsset(string assetID)
 		{
@@ -161,10 +166,13 @@ namespace WindowsAzureDemo.Shared.Media
 			return mediaProcessor;
 		}
 		#endregion
+		#endregion
 
+		#region IDisposable Members
 		public void Dispose()
 		{
 			_context.DetachAll();
 		}
+		#endregion
 	}
 }

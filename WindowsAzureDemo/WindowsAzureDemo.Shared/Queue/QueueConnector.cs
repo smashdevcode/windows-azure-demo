@@ -10,13 +10,19 @@ namespace WindowsAzureDemo.Shared.Queue
 {
 	public static class QueueConnector
 	{
-		public static QueueClient QueueClient;
+		#region Properties
+		public static QueueClient QueueClient { get; set; }
+		#endregion
 
+		#region Methods
+		#region GetQueueClient
 		public static QueueClient GetQueueClient()
 		{
 			Initialize();
 			return QueueClient;
 		}
+		#endregion
+		#region CreateNamespaceManager
 		public static NamespaceManager CreateNamespaceManager()
 		{
 			// get the service bus connection string
@@ -27,6 +33,8 @@ namespace WindowsAzureDemo.Shared.Queue
 
 			return namespaceManager;
 		}
+		#endregion
+		#region Initialize
 		public static void Initialize()
 		{
 			if (QueueClient != null)
@@ -46,9 +54,13 @@ namespace WindowsAzureDemo.Shared.Queue
 				namespaceManager.Settings.TokenProvider);
 			QueueClient = messagingFactory.CreateQueueClient(queueName);
 		}
+		#endregion
+		#region SendMessage
 		public static void SendMessage(object serializableObject)
 		{
 			GetQueueClient().Send(new BrokeredMessage(serializableObject));
 		}
+		#endregion
+		#endregion
 	}
 }

@@ -17,6 +17,7 @@ namespace WindowsAzureDemo.Shared.Entities
 			get { return (FileType)this.FileType; }
 			set { this.FileType = (int)value; }
 		}
+		#region FileTypeExtension
 		public string FileTypeExtension
 		{
 			get
@@ -24,6 +25,8 @@ namespace WindowsAzureDemo.Shared.Entities
 				return FileTypeHelper.GetFileTypeExtension(this.FileTypeEnum);
 			}
 		}
+		#endregion
+		#region MediaPlayerType
 		public string MediaPlayerType
 		{
 			get
@@ -41,6 +44,7 @@ namespace WindowsAzureDemo.Shared.Entities
 				}
 			}
 		}
+		#endregion
 		public string MediaServicesAssetID { get; set; }
 	}
 }
