@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WindowsAzureDemo.Shared.Entities.Video>
+
+@{
+	ViewBag.Title = "Videos";
+}
+
+<!-- Microsoft Media Platform Player Framework http://playerframework.codeplex.com/ -->
+<div id="videocontainer" class="pf-container" style="height: 320px; width: 480px; margin-bottom: 20px;"></div>
+
+<p>
+    @Html.ActionLink("Upload Video", "Upload", null, new { @class = "btn btn-primary" })
+</p>
+
+@Html.RenderGrid("videos", Model, new List<string>() { "VideoID", "Description", "VideoStatus" },
+	message: "Click on a row to display that file.",
+	deleteAction: (item => Url.Action("Delete", new { videoid=item.VideoID })),
+	additionalRowAttributes: (item => string.Format("class=\"video\" video-id=\"{0}\"", item.VideoID)))
+
+@section scripts {
+	<script type="text/javascript" src="@Url.Content("~/Scripts/videomediaplayer.js")"></script>
+}
